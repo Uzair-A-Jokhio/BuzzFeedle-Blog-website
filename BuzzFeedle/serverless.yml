@@ -1,0 +1,20 @@
+service: my-django-app
+
+plugins:
+  - serverless-wsgi
+
+provider:
+  name: vercel
+  runtime: Python 3.10.6 # Ensure Python version is correct
+  region: aws-us-east-1
+
+functions:
+  web:
+    handler: wsgi.app  # This is a pointer to your Django WSGI app
+    events:
+      - http: '*'
+
+custom:
+  wsgi:
+    app: BuzzFeedle.wsgi  # Replace `myproject` with the name of your Django project
+    packRequirements: false  # Whether to include the entire `requirements.txt`

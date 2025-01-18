@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br><br><br><br><br><br>
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-12 text-center mb-3">
+            <!-- Profile Image in Rounded Card -->
+            <div class="profile-img-card">
+                {% if page_user.profile_pic %}
+                    <img src="{{ page_user.profile_pic.url }}" class="profile-img rounded-circle" width="200" height="200">
+                {% else %}
+                    <img src="{% static 'theApp/img/profile_default.jpg' %}" class="profile-img rounded-circle" width="200" height="200">
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <div class="card-body text-center">
+                <h5 class="card-title">
+                    {{ page_user.user.first_name }}
+                    {{ page_user.user.last_name }}
+                </h5>
+                
+                <p class="small text-muted">
+                    {% if page_user.website_url %}
+                        <a href="{{ page_user.website_url }}"><i class="fas fa-globe"></i>  Website | </a>
+                    {% endif %}
+
+                    {% if page_user.facebook_url %}
+                        <a href="{{ page_user.facebook_url }}"><i class="fab fa-facebook"></i> Facebook | </a>
+                    {% endif %}
+
+                    {% if page_user.twitter_url %}
+                        <a href="{{ page_user.twitter_url }}"><i class="fab fa-twitter"></i>  Twitter | </a>
+                    {% endif %}
+
+                    {% if page_user.instagram_url %}
+                        <a href="{{ page_user.instagram_url }}"><i class="fab fa-instagram"></i>  Instagram | </a>
+                    {% endif %}
+
+                    {% if page_user.pinterest_url %}
+                        <a href="{{ page_user.pinterest_url }}"><i class="fab fa-pinterest"></i>  Pinterest | </a>
+                    {% endif %}
+
+                    {% if page_user.linkedin_url %}
+                        <a href="{{ page_user.linkedin_url }}"><i class="fab fa-linkedin"></i>  Linkedin | </a>
+                    {% endif %}
+                </p>
+                
+                <p class="card-text">
+                    {{ page_user.bio }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

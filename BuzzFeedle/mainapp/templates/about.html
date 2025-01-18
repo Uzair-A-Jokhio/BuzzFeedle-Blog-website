@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+<head>
+  <!-- Include additional head content here -->
+</head>
+
+{% block content %}
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+      <div class="jumper">
+          <div></div>
+          <div></div>
+          <div></div>
+      </div>
+    </div>  
+    <!-- Header -->
+
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>About Us</h4>
+                <h2>More About Buzz Feedle!</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Banner Ends Here -->
+
+    <!-- About Us Section -->
+    <section class="about-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <img src="{% static 'mainapp/assets/images/_aboutus.png'%}" alt="Buzz Feedle - Blogging Website">
+            <p>Welcome to <strong>Buzz Feedle</strong>, your go-to destination for insightful and engaging blogs on a variety of topics! Whether you're looking for the latest trends, thought-provoking articles, or creative pieces, Buzz Feedle is here to bring you the best of the blogging world.</p>
+            <p>Our platform is home to a diverse range of bloggers who share their expertise and passion on topics including technology, lifestyle, business, entertainment, health, and much more. At Buzz Feedle, we believe in the power of words to inspire, educate, and entertain. Our mission is to foster a community where ideas are shared freely, and voices from all walks of life are heard.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h4>Our Vision</h4>
+            <p>To be the leading platform where bloggers can share their stories and connect with a global audience. We strive to provide a space that is both informative and entertaining, giving readers fresh perspectives and content they can trust.</p>
+          </div>
+          <div class="col-lg-6">
+            <h4>What We Offer</h4>
+            <ul>
+              <li><strong>Diverse Content:</strong> From the latest in tech to lifestyle advice, Buzz Feedle offers blogs on a wide array of topics, ensuring there's something for everyone.</li>
+              <li><strong>Engaging Bloggers:</strong> Our team of bloggers is dedicated to delivering insightful and engaging content that keeps our readers coming back for more.</li>
+              <li><strong>Community Connection:</strong> Buzz Feedle isn't just a website; it's a place where readers and bloggers can connect, share ideas, and be part of a thriving community.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Whether you're a blogger looking for a platform to share your thoughts, or a reader seeking inspiration, Buzz Feedle is here for you. Join us in our journey to make the world a better place, one blog at a time!</p>
+          </div>
+        </div>
+        
+        <!-- Social Icons -->
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="social-icons">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-behance"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    {% endblock %}
+  </body>
+</html>

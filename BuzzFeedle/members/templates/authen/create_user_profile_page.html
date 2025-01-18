@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br><br><br>
+{% if user.is_authenticated %}
+<div class="col-md-8  offset-md-2">
+    <div class="card shadow p-4 mb-5 bg-body rounded ">
+    <h1>Create Profile Page... </h1>
+    
+
+   
+        <form method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+   
+
+
+    <script>
+        var name = "{{user.id}}";
+        document.getElementById("user_name").value = name;
+    </script>
+    </div>
+    </div>
+
+{% endif %}
+
+{% endblock %}

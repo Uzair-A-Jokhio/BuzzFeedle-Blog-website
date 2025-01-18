@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+
+
+<div class="heading-page header-text">
+    <section class="page-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="text-content">
+              <h2>Categories</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<br><br>
+  <section class="category-list">
+    <div class="container">
+      <div class="row">
+        {% for category in cat_menu_list %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="category-item border p-3 rounded">
+              <div class="category-icon text-center mb-3">
+                <!-- Example icon: you can replace this with any icon associated with the category -->
+                <i class="fa fa-{{ category.name }} fa-3x"></i>
+              </div>
+              <div class="category-name text-center">
+                <h4><a href="{% url 'category' category|slugify %}" >{{ category }}</a></h4>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+</section>
+
+{% endblock %}

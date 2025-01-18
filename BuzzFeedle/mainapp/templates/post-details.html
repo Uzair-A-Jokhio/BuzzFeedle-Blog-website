@@ -1,0 +1,307 @@
+{% extends 'base.html'  %}
+{% load static %}
+<head>
+
+<!--
+
+TemplateMo 551 Stand Blog
+
+https://templatemo.com/tm-551-stand-blog
+
+-->
+  </head>
+{% block content %}
+  <body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div> 
+    </div>  
+    <!-- ***** Preloader End ***** -->
+
+   
+
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>Post Details</h4>
+                <h2>{{product.name}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Banner Ends Here -->
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="{{product.image.url}}" alt="{{product.name}}">
+                    </div>
+                    <div class="down-content">
+                      <span>{{product.category}}</span>
+                      <a><h4>{{product.name}}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="">{{product.author}}</a></li>
+                        <li><a href="">{{product.created_at}}</a></li>
+                        <li>
+                          {% if user.is_authenticated %}
+                            {% if liked %}
+                                <form action="{% url 'like_post' product.pk  %}" method="POST">
+                                    {% csrf_token %}
+                                    {{total_likes}} likes -
+                                    <button type="sumbit", name="post_id", value="{{product.id}}", class="btn btn-danger btn-sm">
+                                      <i class="fas fa-thumbs-down"></i> 
+                                    </button> 
+                                </form> 
+                            {% else %}
+                                <form action="{% url 'like_post' product.pk  %}" method="POST">
+                                    {% csrf_token %}
+                                    {{total_likes}} likes -
+                                    <button type="sumbit", name="post_id", value="{{product.id}}", class="btn btn-primary btn-sm">
+                                      <i class="fas fa-thumbs-up"></i> 
+                                    </button>  
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            
+                                 <small><a href="{% url 'login' %}">Login </a></small> to like - {{total_likes}} likes
+                         
+                        {% endif %}
+                        </li>
+                      </ul>
+                      <p>{{product.description|safe}}</p>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-6">
+                            <ul class="post-tags">
+                              {% if user.is_authenticated %}  
+                                  {% if user.id == product.author.id %}
+                                      <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary mr-2">Edit</a>
+                                      <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger mr-2">Delete</a>
+                                  {% endif %}
+                              {% endif %}
+                            </ul>
+                          </div>
+                          <div class="col-6">
+                            <ul class="post-share">
+                              <li><i class="fa fa-share-alt"></i></li>
+                              <li><a href="#">Facebook</a>,</li>
+                              <li><a href="#"> Twitter</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="sidebar-item profile-bar">
+                    <div class="content">
+                      <div class="row align-items-center">
+                        <!-- Profile Image -->
+                        <div class="col-4 text-center">
+                          {% if product.author.profile.profile_pic %}
+                            <img src="{{ product.author.profile.profile_pic.url }}" class="rounded-circle" width="100" height="100">
+                          {% else %}
+                            <img src="{% static 'mainapp/assets/images/profile_default.png' %}" class="rounded-circle" width="100" height="100">
+                          {% endif %}
+                        </div>
+                        
+                        <!-- Profile Information -->
+                        <div class="col-8">
+                          <h4>{{ product.author.first_name }} {{ product.author.last_name }}</h4>
+                          <p>{{ product.author.profile.bio }}</p>
+                          <p>
+                            {% if product.author.profile.website_url %}
+                              <a href="{{ product.author.profile.website_url }}"><i class="fas fa-globe"></i></a>&nbsp;
+                            {% endif %}
+                            {% if product.author.profile.facebook_url %}
+                              <a href="{{ product.author.profile.facebook_url }}"><i class="fab fa-facebook"></i></a>&nbsp;
+                            {% endif %}
+                            {% if product.author.profile.twitter_url %}
+                              <a href="{{ product.author.profile.twitter_url }}"><i class="fab fa-twitter"></i></a>&nbsp;
+                            {% endif %}
+                            {% if product.author.profile.instagram_url %}
+                              <a href="{{ product.author.profile.instagram_url }}"><i class="fab fa-instagram"></i></a>&nbsp;
+                            {% endif %}
+                            {% if product.author.profile.linkedin_url %}
+                              <a href="{{ product.author.profile.linkedin_url }}"><i class="fab fa-linkedin"></i></a>&nbsp;
+                            {% endif %}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                
+                
+                
+                <div class="col-lg-12">
+                  <div class="sidebar-item comments">
+                    <div class="sidebar-heading">
+                      <h2>4 comments</h2>
+                    </div>
+                    {% if not product.comments.all %}
+                    <h4>No comments yet..</h4>
+                    {% else %}
+                    {% for comment in product.comments.all %}
+                    <div class="content">
+                      <ul>
+                        <li>
+                          <div class="author-thumb">
+                            <img src="/assets/images/comment-author-01.jpg" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>{{comment.name}}<span>{{comment.date}}</span></h4>
+                            <p>{{comment.body}}</p>
+                          </div>
+                        </li>
+                        {% endfor %}
+                        
+                        <!-- <li>
+                          <div class="author-thumb">
+                            <img src="assets/images/comment-author-03.jpg" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>Belisimo Mama<span>May 16, 2020</span></h4>
+                            <p>Nullam nec pharetra nibh. Cras tortor nulla, faucibus id tincidunt in, ultrices eget ligula. Sed vitae suscipit ligula. Vestibulum id turpis volutpat, lobortis turpis ac, molestie nibh.</p>
+                          </div>
+                        </li> -->
+                        <!-- <li class="replied">
+                          <div class="author-thumb">
+                            <img src="assets/images/comment-author-02.jpg" alt="">
+                          </div>
+                          <div class="right-content">
+                            <h4>Thirteen Man<span>May 22, 2020</span></h4>
+                            <p>Mauris sit amet justo vulputate, cursus massa congue, vestibulum odio. Aenean elit nunc, gravida in erat sit amet, feugiat viverra leo.</p>
+                          </div>
+                        </li> -->
+                      </ul>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item submit-comment">
+                    <div class="sidebar-heading">
+                      <h2>Your comment</h2>
+                    </div>
+                    <div class="content">
+                      <form id="comment" action="{% url 'add_comment' product.pk %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                            <fieldset>
+                              {{form.name}}
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-12">
+                            <fieldset>
+                              <textarea name="message" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-12">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="main-button">Submit</button>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="sidebar-item search">
+                    <form id="search_form" name="gs" method="GET" action="#">
+                      <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
+                    </form>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item recent-posts">
+                    <div class="sidebar-heading">
+                      <h2>Recent Posts</h2>
+                    </div>
+                    {% for item in side_bar_product|slice:":3" %}
+                    <div class="content">
+                      <ul>
+                        <li><a href="{% url 'post_detail' pk=item.pk %}">
+                          <h5>{{item.name}}</h5>
+                          <span>{{item.created_at}}</span>
+                        </a></li>
+                      </ul>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item categories">
+                    <div class="sidebar-heading">
+                      <h2>Categories</h2>
+                    </div>
+                    <div class="content">
+                      {% for item in cat_menu %}
+                      <ul>
+                        <li><h4><a href="{% url 'category' item|slugify %}">- {{item}}</a></h4></li>
+                      </ul>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item tags">
+                    <div class="sidebar-heading">
+                      <h2>Tag Clouds</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        <li><<a href="#">Lifestyle</a></li>
+                        <li><a href="#">Creative</a></li>
+                        <li><a href="#">HTML5</a></li>
+                        <li><a href="#">Inspiration</a></li>
+                        <li><a href="#">Motivation</a></li>
+                        <li><a href="#">PSD</a></li>
+                        <li><a href="#">Responsive</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+{% endblock %}    
+
+  </body>
+
+</html>

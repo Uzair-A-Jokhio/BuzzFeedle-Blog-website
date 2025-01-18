@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<br><br><br><br><br>
+{% if user.is_authenticated %}
+<div class="col-md-8  offset-md-2">
+    <div class="card shadow p-4 mb-5 bg-body rounded ">
+            <h1 class="">Post a Blog</h1>
+            <br>
+            <form method="POST"  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.media}}
+                {{form.as_p}}
+                {% if errors %}
+                    <ul>
+                    {% for field_errors in errors %}
+                        <li>{{field_errors}}</li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Blogg</button>
+            </form>
+    </div>
+
+    <script>
+        var name = "{{user.id}}";
+        document.getElementById("user_name").value = name;
+    </script>
+
+{% endif %}
+
+</div>
+
+{% endblock %}
